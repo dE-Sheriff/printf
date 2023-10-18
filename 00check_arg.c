@@ -30,11 +30,4 @@ void _chckarg(const char *format, int char_len, va_list arg_list)
 		write(1, str, s_len);
 		char_len += s_len;
 	}
-	else if ((*format == 'd') || (*format ==  'i'))
-	{
-	       	int_d = va_arg(arg_list, int);
-		printf("%d", int_d);
-		write(1, &int_d, 1);
-		char_len += 4;
-	}
 }
