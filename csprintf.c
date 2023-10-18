@@ -41,6 +41,8 @@ int _printf(const char *format, ...)
 				else if (*format == 's')
 				{
 					str = va_arg(arg_list, char *);
+					if (str == '0')
+						str = '(null)';
 					s_len = _strlen(str);
 					write(1, str, s_len);
 					char_len += s_len;
