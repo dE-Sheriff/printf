@@ -9,8 +9,7 @@
 int _printf(const char *format, ...)
 {
 	va_list arg_list;
-	int char_len = 0, ch, s_len;
-	char *str;
+	int char_len = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -27,24 +26,7 @@ int _printf(const char *format, ...)
 			else
 			{
 				format++;
-				if (*format == '%')
-				{
-					write(1, format, 1);
-					char_len++;
-				}
-				else if (*format == 'c')
-				{
-					ch = va_arg(arg_list, int);
-					write(1, &ch, 1);
-					char_len++;
-				}
-				else if (*format == 's')
-				{
-					str = va_arg(arg_list, char *);
-					s_len = _strlen(str);
-					write(1, str, s_len);
-					char_len += s_len;
-				}
+				_chckarg(&*format, char_len, arg_list);
 			}
 			format++;
 		}
