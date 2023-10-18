@@ -1,2 +1,1 @@
-# printf
-ALX Group Project
+ printf project by Sheriff and Chinedu
