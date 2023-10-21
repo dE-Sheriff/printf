@@ -22,16 +22,14 @@ void print_str(va_list a_list, int char_len)
 /**
  * print_char - prints char when format == 'c'
  * @a_list: vaariadiac list
- * @char_len: lenght of char
  */
 
-void print_char(va_list a_list, int char_len)
+void print_char(va_list a_list)
 {
 	int ch;
 
 	ch = va_arg(a_list, int);
 	write(1, &ch, 1);
-	char_len++;
 }
 
 /**
@@ -66,7 +64,10 @@ int _printf(const char *format, ...)
 					char_len++;
 				}
 				else if (*format == 'c')
-					print_char(arg_list, char_len);
+				{
+					print_char(arg_list);
+					char_len++;
+				}
 				else if (*format == 's')
 					print_str(arg_list, char_len);
 				else
