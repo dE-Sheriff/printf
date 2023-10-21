@@ -1,6 +1,18 @@
 #include "main.h"
 
 /**
+ * print_curnt_char - print current character in format
+ * @format: the va_list
+ * Return: (1)
+ */
+
+int print_curnt_char(const char *format)
+{
+	write(1, format, 1);
+	return (1);
+}
+
+/**
  * print_str - prints string when format == 's'
  * @a_list: vaariadiac list
  * Return: char_len
@@ -53,18 +65,12 @@ int _printf(const char *format, ...)
 		while (*format != '\0')
 		{
 			if (*format != '%')
-			{
-				write(1, format, 1);
-				char_len++;
-			}
+				char_len += print_curnt_char(format);
 			else
 			{
 				format++;
 				if (*format == '%')
-				{
-					write(1, format, 1);
-					char_len++;
-				}
+					char_len += print_curnt_char(format);
 				else if (*format == 'c')
 					char_len += print_char(arg_list);
 				else if (*format == 's')
