@@ -4,9 +4,10 @@
  * print_str - prints string when format == 's'
  * @a_list: vaariadiac list
  * @char_len: lenght of char
+ * Return: char_len
  */
 
-void print_str(va_list a_list, int char_len)
+int print_str(va_list a_list, int char_len)
 {
 	char *str;
 	int s_len;
@@ -17,6 +18,7 @@ void print_str(va_list a_list, int char_len)
 	s_len = _strlen(str);
 	write(1, str, s_len);
 	char_len += s_len;
+	return (char_len);
 }
 
 /**
