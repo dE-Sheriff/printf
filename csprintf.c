@@ -72,7 +72,10 @@ int _printf(const char *format, ...)
 				if (*format == '%')
 					char_len += print_curnt_char(format);
 				else if (*format == '\0')
+				{
 					write(1, NULL, 0);
+					char_len++;
+				}
 				else if (*format == 'c')
 					char_len += print_char(arg_list);
 				else if (*format == 's')
