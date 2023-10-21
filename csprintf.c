@@ -24,7 +24,7 @@ int print_str(va_list a_list)
 	int s_len;
 
 	str = va_arg(a_list, char *);
-	if (str == (char *)'0')
+	if (str == (char *)0)
 		str = (char *)"(null)";
 	s_len = _strlen(str);
 	write(1, str, s_len);
@@ -72,7 +72,7 @@ int _printf(const char *format, ...)
 				if (*format == '%')
 					char_len += print_curnt_char(format);
 				else if (*format == '\0')
-					write(1, (char *)"", 0);
+					write(1, NULL, 0);
 				else if (*format == 'c')
 					char_len += print_char(arg_list);
 				else if (*format == 's')
