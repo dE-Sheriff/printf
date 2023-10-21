@@ -1,6 +1,40 @@
 #include "main.h"
 
 /**
+ * print_str - prints string when format == 's'
+ * @a_list: vaariadiac list
+ * @char_len: lenght of char
+ */
+
+void print_str(va_list a_list, int char_len)
+{
+	char *str;
+	int s_len;
+
+	str = va_arg(a_list, char *);
+	if (str == (char *)'0')
+	str = (char *)"(null)";
+	s_len = _strlen(str);
+	write(1, str, s_len);
+	char_len += s_len;
+}
+
+/**
+ * print_char - prints char when format == 'c'
+ * @a_list: vaariadiac list
+ * @char_len: lenght of char
+ */
+
+void print_char(va_list a_list, int char_len)
+{
+	int ch;
+
+	ch = va_arg(a_list, int);
+	write(1, &ch, 1);
+	char_len++;
+}
+
+/**
  * _printf - a function that produces output according to a format
  *@format: a character string, composed of zero or more directives
  *Return: sting
@@ -9,8 +43,7 @@
 int _printf(const char *format, ...)
 {
 	va_list arg_list;
-	int char_len = 0, ch, s_len;
-	char *str;
+	int char_len = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -33,20 +66,9 @@ int _printf(const char *format, ...)
 					char_len++;
 				}
 				else if (*format == 'c')
-				{
-					ch = va_arg(arg_list, int);
-					write(1, &ch, 1);
-					char_len++;
-				}
+					print_char(arg_list, char_len);
 				else if (*format == 's')
-				{
-					str = va_arg(arg_list, char *);
-					if (str == (char *)'0')
-						str = (char *)"(null)";
-					s_len = _strlen(str);
-					write(1, str, s_len);
-					char_len += s_len;
-				}
+					print_str(arg_list, char_len);
 				else
 				{
 					format--;
