@@ -3,11 +3,10 @@
 /**
  * print_str - prints string when format == 's'
  * @a_list: vaariadiac list
- * @char_len: lenght of char
  * Return: char_len
  */
 
-int print_str(va_list a_list, int char_len)
+int print_str(va_list a_list)
 {
 	char *str;
 	int s_len;
@@ -17,21 +16,22 @@ int print_str(va_list a_list, int char_len)
 	str = (char *)"(null)";
 	s_len = _strlen(str);
 	write(1, str, s_len);
-	char_len += s_len;
-	return (char_len);
+	return (s_len);
 }
 
 /**
  * print_char - prints char when format == 'c'
  * @a_list: vaariadiac list
+ * Return: (1)
  */
 
-void print_char(va_list a_list)
+int print_char(va_list a_list)
 {
 	int ch;
 
 	ch = va_arg(a_list, int);
 	write(1, &ch, 1);
+	return (1);
 }
 
 /**
@@ -43,7 +43,7 @@ void print_char(va_list a_list)
 int _printf(const char *format, ...)
 {
 	va_list arg_list;
-	int char_len = 0;
+	int char_len = 0, s_len = 0;
 
 	if (format == NULL)
 		return (-1);
@@ -66,12 +66,12 @@ int _printf(const char *format, ...)
 					char_len++;
 				}
 				else if (*format == 'c')
-				{
-					print_char(arg_list);
-					char_len++;
-				}
+					char_len += print_char(arg_list);
 				else if (*format == 's')
-					print_str(arg_list, char_len);
+				{
+					s_len = print_str(arg_list);
+					char_len += s_len;
+				}
 				else
 				{
 					format--;
