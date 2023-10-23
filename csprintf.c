@@ -83,6 +83,11 @@ int _printf(const char *format, ...)
 					s_len = print_str(arg_list);
 					char_len += s_len;
 				}
+				else if ((*format == 'i') || (*format == 'd'))
+				{
+					s_len = print_int(arg_list);
+					char_len += s_len;
+				}
 				else
 				{
 					format--;
